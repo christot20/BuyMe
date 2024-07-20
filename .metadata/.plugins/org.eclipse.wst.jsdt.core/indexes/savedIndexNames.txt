@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+C:\CS_Classes\cs336\Project\cs336AuctionFinalProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+79178229.index
+1018006157.index
+2358268054.index
+959432402.index
+959432402.index
+4156350991.index
+2403801880.index
+3280454797.index

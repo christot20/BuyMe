@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Computer Listings</h1>
+    <form action="StaffMode.jsp">
+        <input type="submit" value="Main Menu">
+    </form>
+
+    <form action="SortComputers.jsp" method="post">
+        <label for="sortOption">Sort by:</label>
+        <select id="sortOption" name="sortOption">
+        	<option value="none">None</option>
+            <option value="current_bid">Current Bid</option>
+            <option value="list_date">List Date</option>
+            <option value="expiration_date">Expiration Date</option>
+            <option value="computer_type">Computer Type</option>
+            <option value="ram">RAM</option>
+            <option value="storage">Storage</option>
+        </select>
+        <input type="submit" value="Sort">
+        
+        <!-- New filtering dropdowns -->
+        <label for="filterComputerType">Computer Type:</label>
+        <select id="filterComputerType" name="filterComputerType">
+            <option value="all">All</option>
+            <option value="LAPTOP">Laptop</option>
+            <option value="DESKTOP">Desktop</option>
+            <option value="ALLINONE">All in One</option>
+        </select>
+
+        <label for="filterPrice">Current Bid:</label>
+        <select id="filterPrice" name="filterPrice">
+            <option value="all">All</option>
+            <option value="500">Current Bid > 500</option>
+            <option value="1000">Current Bid > 1000</option>
+        </select>
+
+        <label for="filterCpu">CPU:</label>
+        <select id="filterCpu" name="filterCpu">
+            <option value="all">All</option>
+            <option value="%Intel%">Intel</option>
+            <option value="%Ryzen%">Ryzen</option>
+        </select>
+        
+        <label for="filterRam">RAM:</label>
+        <select id="filterRam" name="filterRam">
+            <option value="all">All</option>
+            <option value="8">RAM > 8GB</option>
+            <option value="16">RAM > 16GB</option>
+        </select>
+        
+        <label for="filterStorage">Storage:</label>
+        <select id="filterStorage" name="filterStorage">
+            <option value="all">All</option>
+            <option value="500">Storage > 500GB</option>
+            <option value="1000">Storage > 1 TB</option>
+        </select>
+
+        <input type="submit" value="Apply Filter">
+        
+    </form>
+
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Computer Type</th>
+        <th>RAM</th>
+        <th>Storage</th>
+        <th>CPU</th>
+        <th>List Date</th>
+        <th>Expiration Date</th>
+        <th>Current Bid</th>
+        <th>Action</th> <!-- New column header -->
+    </tr>
+    <% try {
+        // Get the database connection
+        ApplicationDB db = new ApplicationDB();
+        Connection con = db.getConnection();
+
+        // Create a SQL statement
+        Statement stmt = con.createStatement();
+        String str = "SELECT name, computer_type, ram, storage, cpu, list_date, expiration_date, current_bid  FROM computers where item_id in (select item_id from bid)";
+        // Run the query against the database.
+        
+        PreparedStatement ps = con.prepareStatement(str);            
+
+        
+        ResultSet result = ps.executeQuery();
+
+        // Parse out the results
+        while (result.next()) { %>
+            <tr>
+                <td><%= result.getString("name") %></td>
+                <td><%= result.getString("computer_type") %></td>
+                <td><%= result.getString("ram") %></td>
+                <td><%= result.getString("storage") %></td>
+                <td><%= result.getString("cpu") %></td>
+                <td><%= result.getString("list_date") %></td>
+                <td><%= result.getString("expiration_date") %></td>
+                <td><%= result.getString("current_bid") %></td>
+                <td>
+				<button onclick="deleteUser('<%= result.getString("user_id") %>')">Delete User</button>
+                </td> <!-- New column data -->
+            </tr>
+        <% }
+        // Close the connection.
+        db.closeConnection(con);
+    } catch (Exception e) {
+        out.print(e);
+    } %>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+127.0.0.1 - - [11/Apr/2024:18:04:05 -0400] "GET / HTTP/1.1" 404 752
+127.0.0.1 - - [11/Apr/2024:18:04:06 -0400] "GET /cs336Sample/ HTTP/1.1" 200 2739
+127.0.0.1 - - [11/Apr/2024:18:04:06 -0400] "GET /favicon.ico HTTP/1.1" 404 763
+127.0.0.1 - - [11/Apr/2024:18:06:49 -0400] "GET / HTTP/1.1" 404 752
+127.0.0.1 - - [11/Apr/2024:18:06:49 -0400] "GET /cs336Sample/WEB-INF/classes/com/cs336/pkg/ApplicationDB.java HTTP/1.1" 404 683
+127.0.0.1 - - [11/Apr/2024:18:07:33 -0400] "GET / HTTP/1.1" 404 752
+127.0.0.1 - - [11/Apr/2024:18:07:34 -0400] "GET /cs336Sample/ HTTP/1.1" 200 2739
+127.0.0.1 - - [11/Apr/2024:18:07:34 -0400] "GET /favicon.ico HTTP/1.1" 404 763
+127.0.0.1 - - [11/Apr/2024:18:08:00 -0400] "POST /cs336Sample/show.jsp HTTP/1.1" 200 3362
+127.0.0.1 - - [11/Apr/2024:18:08:15 -0400] "POST /cs336Sample/show.jsp HTTP/1.1" 200 2694
+127.0.0.1 - - [11/Apr/2024:18:08:15 -0400] "GET /favicon.ico HTTP/1.1" 404 763
+127.0.0.1 - - [11/Apr/2024:18:09:58 -0400] "GET /cs336Sample/sellsNewBeer.jsp?barvalia=Blue+Tattoo&beer=Blue+Moon&price=99.99 HTTP/1.1" 200 349
+127.0.0.1 - - [11/Apr/2024:18:09:58 -0400] "GET /favicon.ico HTTP/1.1" 404 763

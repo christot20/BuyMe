@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+        <tr>
+            <th>Name</th>
+            <th>Computer Type</th>
+            <th>RAM</th>
+            <th>Storage</th>
+            <th>CPU</th>
+            <th>List Date</th>
+            <th>Expiration Date</th>
+            <th>Current Bid</th>
+        </tr>
+        <% try {
+            // Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            // Construct the base SQL query
+            String baseQuery = "SELECT user_id, username FROM users";
+
+            PreparedStatement ps = con.prepareStatement(baseQuery);
+            
+            ResultSet result = ps.executeQuery();
+            
+
+            while (result.next()) { %>
+                <tr>
+                    <td><%= result.getString("user_id") %></td>
+                    <td><%= result.getString("username") %></td>
+                </tr>
+            <% }
+            // Close the connection.
+            db.closeConnection(con);
+        } catch (Exception e) {
+            out.print(e);
+        } %>
+    </table>
+	
+</body>
+</html>

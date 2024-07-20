@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<% try {
+	
+			//Get the database connection
+			ApplicationDB db = new ApplicationDB();	
+			Connection con = db.getConnection();		
+
+			//Create a SQL statement
+			Statement stmt = con.createStatement();
+			String str = "SELECT name, computer_type, ram, storage, cpu, list_date, expiration_date, current_bid FROM computers";
+			//Run the query against the database.
+			ResultSet result = stmt.executeQuery(str);
+		%>
+		
+		<!--  Make an HTML table to show the results in: -->
+	<table>
+		<tr>    
+			<td>Name</td>
+			<td>Computer Type</td>
+			<td>RAM</td>
+			<td>Storage</td>
+			<td>CPU</td>
+			<td>List Date</td>
+			<td>Expiration Date</td>
+			<td>Current Bid</td>
+		</tr>
+			<%
+			//parse out the results
+			while (result.next()) { %>
+				<tr>    
+					<td><%= result.getString("name") %></td>
+					<td><%= result.getString("computer_type")%></td>
+					<td><%= result.getString("ram")%></td>
+					<td><%= result.getString("storage")%></td>
+					<td><%= result.getString("cpu")%></td>
+					<td><%= result.getString("list_date")%></td>
+					<td><%= result.getString("expiration_date")%></td>
+					<td><%= result.getString("current_bid")%></td>
+				</tr>
+				
+
+			<% }
+			//close the connection.
+			db.closeConnection(con);
+			%>
+		</table>
+
+			
+		<%} catch (Exception e) {
+			out.print(e);
+		}%>
+	
+		
+</body>
+</html>

@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	String sortOption = request.getParameter("sortOption");
+
+        try {
+            // Establish database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            // Modify your SQL query based on the selected sort option
+            String query = "SELECT * FROM computers ORDER BY " + sortOption;
+
+            // Execute the query
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            // Process the sorted results (similar to your existing JSP)
+
+            // Close the connection
+            db.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("Error sorting computers.");
+        }
+    }
+%>
+</body>
+</html>

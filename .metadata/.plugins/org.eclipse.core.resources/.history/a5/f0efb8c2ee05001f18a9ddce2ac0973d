@@ -1,0 +1,112 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Listings</title>
+</head>
+<body>
+    <h1>Computer Listings</h1>
+    <form action="Welcome.jsp">
+        <input type="submit" value="Main Menu">
+    </form>
+
+    <form action="SortComputers.jsp" method="post">
+        <label for="sortOption">Sort by:</label>
+        <select id="sortOption" name="sortOption">
+            <option value="current_bid">Current Bid</option>
+            <option value="list_date">List Date</option>
+            <option value="expiration_date">Expiration Date</option>
+            <option value="computer_type">Computer Type</option>
+            <option value="ram">RAM</option>
+            <option value="storage">Storage</option>
+        </select>
+        <input type="submit" value="Sort">
+        
+        <!-- New filtering dropdowns -->
+    <label for="filterComputerType">Computer Type:</label>
+    <select id="filterComputerType" name="filterComputerType">
+        <option value="all">All</option>
+        <option value="laptop">Laptop</option>
+        <option value="desktop">Desktop</option>
+        <option value="aio">All in One</option>
+    </select>
+
+    <label for="filterPrice">Price:</label>
+    <select id="filterPrice" name="filterPrice">
+        <option value="all">All</option>
+        <option value="price_1000">Price <= 1000</option>
+        <option value="price_gt_1000">Price > 1000</option>
+    </select>
+
+    <label for="filterCpu">CPU:</label>
+    <select id="filterCpu" name="filterCpu">
+        <option value="all">All</option>
+        <option value="intel">Intel</option>
+        <option value="ryzen">Ryzen</option>
+    </select>
+    
+    <label for="filterRam">RAM:</label>
+    <select id="filterRam" name="filterRam">
+        <option value="all">All</option>
+        <option value="ram_16">RAM <= 16GB</option>
+        <option value="ram_gt_16">RAM > 16GB</option>
+    </select>
+    
+    <label for="filterStorage">Storage:</label>
+    <select id="filterRam" name="filterRam">
+        <option value="all">All</option>
+        <option value="ram_16">RAM <= 16GB</option>
+        <option value="ram_gt_16">RAM > 16GB</option>
+    </select>
+
+    <input type="submit" value="Apply Filter">
+        
+    </form>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Computer Type</th>
+            <th>RAM</th>
+            <th>Storage</th>
+            <th>CPU</th>
+            <th>List Date</th>
+            <th>Expiration Date</th>
+            <th>Current Bid</th>
+        </tr>
+        <% try {
+            // Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            // Create a SQL statement
+            Statement stmt = con.createStatement();
+            String str = "SELECT name, computer_type, ram, storage, cpu, list_date, expiration_date, current_bid FROM computers";
+            // Run the query against the database.
+            ResultSet result = stmt.executeQuery(str);
+
+            // Parse out the results
+            while (result.next()) { %>
+                <tr>
+                    <td><%= result.getString("name") %></td>
+                    <td><%= result.getString("computer_type") %></td>
+                    <td><%= result.getString("ram") %></td>
+                    <td><%= result.getString("storage") %></td>
+                    <td><%= result.getString("cpu") %></td>
+                    <td><%= result.getString("list_date") %></td>
+                    <td><%= result.getString("expiration_date") %></td>
+                    <td><%= result.getString("current_bid") %></td>
+                </tr>
+            <% }
+            // Close the connection.
+            db.closeConnection(con);
+        } catch (Exception e) {
+            out.print(e);
+        } %>
+    </table>
+</body>
+</html>
