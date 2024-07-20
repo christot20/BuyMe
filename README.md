@@ -1,7 +1,7 @@
 # BuyMe
 
 <p align="center">
-  <img src="/app_photos/buyme_1.png" width="250" height="250">
+  <img src="/app_photos/buyme_1.png" width="400" height="250">
 </p>
 
 ### This is a JSP/MYSQL full stack EBay clone focused on purchasing computing devices. Some of the key features include:
@@ -18,9 +18,8 @@
 <div style="text-align:center">
   <table>
     <tr>
-      <td align="center"><img src="/app_photos/buyme_2.png" width="250" height="250"></td>
-      <td align="center"><img src="/app_photos/buyme_3.png" width="250" height="250"></td>
-      <td align="center"><img src="/app_photos/buyme_4.png" width="250" height="250"></td>
+      <td align="center"><img src="/app_photos/buyme_2.png" width="400" height="250"></td>
+      <td align="center"><img src="/app_photos/buyme_3.png" width="400" height="250"></td>
     </tr>
   </table>
 </div>
@@ -28,9 +27,17 @@
 <div style="text-align:center">
   <table>
     <tr>
-      <td align="center"><img src="/app_photos/buyme_5.png" width="250" height="250"></td>
-      <td align="center"><img src="/app_photos/buyme_6.png" width="250" height="250"></td>
-      <td align="center"><img src="/app_photos/buyme_7.png" width="250" height="250"></td>
+      <td align="center"><img src="/app_photos/buyme_4.png" width="400" height="250"></td>
+      <td align="center"><img src="/app_photos/buyme_5.png" width="400" height="250"></td>
+    </tr>
+  </table>
+</div>
+
+<div style="text-align:center">
+  <table>
+    <tr>
+      <td align="center"><img src="/app_photos/buyme_6.png" width="400" height="250"></td>
+      <td align="center"><img src="/app_photos/buyme_7.png" width="400" height="250"></td>
     </tr>
   </table>
 </div>
